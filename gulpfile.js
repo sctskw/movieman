@@ -31,10 +31,11 @@ var src = {
   },
 
   browserify: {
-    src: 'public/js/app.js',
+    src: 'public/js/index.js',
+    dest: 'public/dist',
     options: {
       insertGlobals: true,
-      debug: true
+      debug: false
     },
     watch: {
       src: ['public/js/**/*.js'],
@@ -86,7 +87,8 @@ gulp.task('test', function() {
 gulp.task('bundle', function() {
   return gulp.src(src.browserify.src)
     .pipe(plugins.browserify(src.browserify.options))
-    .pipe(gulp.dest('public/dist/js'));
+    .pipe(plugins.rename('app.js'))
+    .pipe(gulp.dest('public/dist/'));
 });
 
 gulp.task('js', function() {
@@ -104,6 +106,7 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
-  gulp.watch(src.scripts.watch.src, src.scripts.watch.exec);
+  // gulp.watch(src.scripts.watch.src, src.scripts.watch.exec);
+  gulp.watch(src.browserify.watch.src, src.browserify.watch.exec);
 });
 

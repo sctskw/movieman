@@ -15043,6 +15043,7 @@ var App = {};
 
 App.start = function(config) {
   var opts = _.extend({}, config);
+  console.log(opts);
   new IndexView({el: opts.viewEl || 'body'}).render();
 };
 
@@ -15062,13 +15063,13 @@ console.log(App);
 
 //when document is ready, start rendering
 Backbone.$(function() {
-  App.start({viewEl: '#content'});
+  App.start({});
 });
 
 
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_18e7ad49.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_45360cdb.js","/")
 },{"./app":9,"backbone":1,"buffer":3,"jquery":7,"oMfpAn":6}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Backbone = require('backbone');
