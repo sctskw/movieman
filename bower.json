@@ -21,5 +21,10 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "bootstrap": "~3.3.1",
+    "fontawesome": "~4.2.0"
+  }
 }
