@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var path = require('path');
 var coffee = require('coffee-script/register');
 
 
@@ -27,6 +28,47 @@ var src = {
         'test'
       ]
     }
+  },
+
+  browserify: {
+    src: 'public/js/app.js',
+    options: {
+      insertGlobals: true,
+      debug: true
+    },
+    watch: {
+      src: ['public/js/**/*.js'],
+      exec: ['bundle']
+    }
+  },
+
+  less: {
+    src: './public/styles/app.less',
+    dest: './public/dist/',
+    options: {
+      paths: [
+        'public/styles'
+      ],
+      filename: 'styles.css'
+    },
+    watch: {
+      src: './public/styles/**/*.less',
+      exec: ['css']
+    }
+  },
+
+  scripts: {
+    src: 'public/js/**/*.js',
+    filename: 'app.js',
+    dest: 'public/dist',
+    options: {
+
+    },
+
+    watch: {
+      src: 'public/js/**/*.js',
+      exec: ['js']
+    }
   }
 };
 
@@ -41,7 +83,27 @@ gulp.task('test', function() {
     // .on('error',  gutil.log);
 });
 
+gulp.task('bundle', function() {
+  return gulp.src(src.browserify.src)
+    .pipe(plugins.browserify(src.browserify.options))
+    .pipe(gulp.dest('public/dist/js'));
+});
+
+gulp.task('js', function() {
+  return gulp.src(src.scripts.src)
+    .pipe(plugins.concat(src.scripts.filename))
+    .pipe(gulp.dest(src.scripts.dest));
+});
+
+gulp.task('css', function() {
+  return gulp.src(src.less.src)
+    .pipe(plugins.less(src.less.options))
+    .pipe(gulp.dest(src.less.dest));
+});
+
 gulp.task('watch', function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
+  gulp.watch(src.less.watch.src, src.less.watch.exec);
+  gulp.watch(src.scripts.watch.src, src.scripts.watch.exec);
 });
 
