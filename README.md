@@ -1,4 +1,4 @@
-node-package-seed
-=================
+MovieMan
+========
 
-a seed repo for developing a simple node package [no ui]
+A simple app to manage and maintain your favorite movie collection
