@@ -1,0 +1,25 @@
+{
+  "name": "movieman",
+  "main": "index.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/sctskw/movieman",
+  "authors": [
+    "scott.skow@gmail.com"
+  ],
+  "description": "simple system for tracking your movie collection",
+  "keywords": [
+    "movies",
+    "node",
+    "movieman"
+  ],
+  "license": "Apache",
+  "private": true,
+  "directory": "public/vendor",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
