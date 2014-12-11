@@ -15037,13 +15037,17 @@ return jQuery;
 },{"buffer":3,"oMfpAn":6}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var _ = require('underscore');
-var IndexView = require('./view');
+var Backbone = require('backbone');
+var Router = require('./router');
 
 var App = {};
 
 App.start = function(config) {
   var opts = _.extend({}, config);
-  new IndexView({el: opts.viewEl || 'body'}).render();
+  var router = new Router();
+  Backbone.history.start({pushState: true});
+
+  console.log('application bootstrapped...');
 };
 
 module.exports = App;
@@ -15052,13 +15056,12 @@ module.exports = App;
 
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app.js","/")
-},{"./view":11,"buffer":3,"oMfpAn":6,"underscore":8}],10:[function(require,module,exports){
+},{"./router":11,"backbone":1,"buffer":3,"oMfpAn":6,"underscore":8}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Backbone = require('backbone');
 Backbone.$ = require('jquery'); //allow backbone access to jquery
 
 var App = require('./app');
-console.log(App);
 
 //when document is ready, start rendering
 Backbone.$(function() {
@@ -15068,14 +15071,43 @@ Backbone.$(function() {
 
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_18e7ad49.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_3f3a7de7.js","/")
 },{"./app":9,"backbone":1,"buffer":3,"jquery":7,"oMfpAn":6}],11:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var Backbone = require('backbone');
+var _ = require('underscore');
+
+//import views
+var loginView = require('./views/login');
+
+var Router = Backbone.Router.extend({
+
+  viewEl: '#content',
+
+  routes: {
+    "": "showLogin"
+  },
+
+  showLogin: function() {
+    this._renderView(new loginView());
+  },
+
+  _renderView: function(view) {
+    Backbone.$(this.viewEl).html(view.render().el);
+  }
+});
+
+
+module.exports = Router;
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/router.js","/")
+},{"./views/login":12,"backbone":1,"buffer":3,"oMfpAn":6,"underscore":8}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
 
-  template: '<h1>Hello World!!</h1>',
+  template: '<h1>Login Page!</h1>',
 
   render: function() {
     this.$el.html(this.template);
@@ -15083,5 +15115,5 @@ module.exports = Backbone.View.extend({
   }
 });
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/view.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/views/login.js","/views")
 },{"backbone":1,"buffer":3,"oMfpAn":6}]},{},[10])

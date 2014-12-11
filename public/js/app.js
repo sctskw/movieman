@@ -1,11 +1,15 @@
 var _ = require('underscore');
-var IndexView = require('./view');
+var Backbone = require('backbone');
+var Router = require('./router');
 
 var App = {};
 
 App.start = function(config) {
   var opts = _.extend({}, config);
-  new IndexView({el: opts.viewEl || 'body'}).render();
+  var router = new Router();
+  Backbone.history.start({pushState: true});
+
+  console.log('application bootstrapped...');
 };
 
 module.exports = App;
