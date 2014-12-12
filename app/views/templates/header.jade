@@ -5,8 +5,7 @@ header
   div.header-tools
     <% if (username) {%>
     span.user-greeting Hello <%= username %>
+    a.settings-link(href="/settings") settings
     a.logout-link(href="/logout") logout
-    <% } else { %>
-    span please sign in
     <% } %>
 
