@@ -1,12 +1,12 @@
 header
+  i.fa.fa-film.logo
   h1.brand
-    i.fa.fa-film
     span.brand-text MovieMan
   div.header-tools
     <% if (username) {%>
     span.user-greeting Hello <%= username %>
     a.logout-link(href="/logout") logout
     <% } else { %>
-    span please log in
+    span please sign in
     <% } %>
 
