@@ -1,12 +1,50 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
 }
 
-ul {
+#header {
+  color: #fff;
+  background-color: @gray;
+  height: 75px;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  width: 100%;
 
+  .header-tools {
+    .pull-right();
+
+    padding: 10px;
+    width: 200px;
+  }
+
+  .user-greeting {
+  }
+
+  .logout-link {
+    padding: 5px;
+  }
+}
+
+#footer {
+  bottom: 0;
+  background-color: @gray-lighter;
+  color: @gray;
+  height: 100px;
+  position: absolute;
+  width: 100%;
+}
+
+#content {
+  margin-top: 100px;
 }

@@ -2,8 +2,9 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 
 //import views
-var indexView = require('./views/index');
-var loginView = require('./views/login');
+var IndexView = require('./views/index');
+var LoginView = require('./views/login');
+var Viewport = require('./views/viewport');
 
 var Router = Backbone.Router.extend({
 
@@ -14,6 +15,13 @@ var Router = Backbone.Router.extend({
   initialize: function(cfg) {
     console.log('initializing routing');
     this.configs = _.extend(this._defaults, cfg || {});
+
+
+    //create main viewport
+    var viewport = new Viewport(this.configs);
+
+    //render viewport
+    viewport.render();
   },
 
   routes: {
@@ -23,17 +31,17 @@ var Router = Backbone.Router.extend({
 
   showIndex: function() {
     console.log('rendering index view');
-    this._renderView(new indexView(this.configs));
+    this._renderView(new IndexView(this.configs));
   },
 
   showLogin: function() {
     console.log('rendering login view...');
-    this._renderView(new loginView(this.configs));
+    this._renderView(new LoginView(this.configs));
   },
 
-  _renderView: function(view) {
+  _renderView: function(view, selector) {
     console.log('rendering a view...');
-    var el = Backbone.$(this.configs.viewEl);
+    var el = Backbone.$(selector || this.configs.viewEl);
     el.html(view.render().el);
   }
 });

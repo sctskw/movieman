@@ -5,6 +5,8 @@ var _ = require('underscore');
 //helper class for all future views
 module.exports = Backbone.View.extend({
 
+  $: Backbone.$,
+
   _defaults: {},
 
   initialize: function(cfg) {

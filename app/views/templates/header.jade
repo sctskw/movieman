@@ -1,0 +1,9 @@
+#header
+  div.header-tools
+    <% if (username) {%>
+    span.user-greeting Hello <%= username %>
+    a.logout-link(href="/logout") logout
+    <% } else { %>
+    span please log in
+    <% } %>
+

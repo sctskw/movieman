@@ -6,7 +6,9 @@ html
     script(src="/app.js")
   body
     #content
-    block content
+      block content
+
+    include templates.jade
     script.
       (function() {
         App.start({

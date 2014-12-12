@@ -13,4 +13,10 @@ router.route('/login')
   })
   .post(auth.authenticate);
 
+router.get('/logout', function(req, res) {
+  delete req.user;
+  delete req.session.user;
+  res.redirect('/');
+});
+
 module.exports = router;
