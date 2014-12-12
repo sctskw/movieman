@@ -19,7 +19,7 @@ a {
   }
 }
 
-#header {
+header {
   color: #fff;
   background-color: @gray;
   height: 75px;
@@ -31,20 +31,30 @@ a {
   .header-tools {
     .pull-right();
 
+    height: 100px;
+    line-height: 50px;
+    margin-right: 25px;
     padding: 10px;
     width: 200px;
+
+    & > :not(:last-child)::after {
+      content: "|";
+      padding: 5px;
+    }
   }
 
-  .user-greeting {
-  }
+  .brand {
+    .pull-left();
 
-  .logout-link {
-    padding: 5px;
-    margin: 10px;
+    margin-left: 20px;
+    width: 300px;
+    i.fa {
+      margin-right: 20px;
+    }
   }
 }
 
-#footer {
+footer {
   background-color: @gray-lighter;
   bottom: 0;
   color: @gray;
