@@ -47,7 +47,6 @@
     "gulp-copy": "0.0.2"
   },
   "browser": {
-    "jquery": "./public/vendor/jquery/dist/jquery.js",
     "bootstrap": "./public/vendor/bootstrap/dist/js/bootstrap.js"
   },
   "browserify": {

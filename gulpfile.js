@@ -21,24 +21,22 @@ var src = {
     },
     watch: {
       src: [
-        'tests/**/*.coffee',
-        'lib/**/*.js'
+        'tests/**/*.coffee'
       ],
-      exec: [
-        'test'
-      ]
+      exec: ['test']
     }
   },
 
   browserify: {
-    src: 'public/js/app.js',
-    dest: 'public/dist',
+    src: './public/src/js/app.js',
+    destFolder: './public/dist/',
+    destFilename: 'app.js',
     options: {
       insertGlobals: true,
       debug: false
     },
     watch: {
-      src: ['public/js/**/*.js'],
+      src: ['public/src/js/**/*.js'],
       exec: ['bundle']
     }
   },
@@ -57,7 +55,7 @@ var src = {
   },
 
   less: {
-    src: './public/styles/app.less',
+    src: './public/src/styles/app.less',
     dest: './public/dist/',
     options: {
       paths: [
@@ -66,30 +64,14 @@ var src = {
       filename: 'styles.css'
     },
     watch: {
-      src: './public/styles/**/*.less',
+      src: './public/src/styles/**/*.less',
       exec: ['css']
-    }
-  },
-
-  scripts: {
-    src: 'public/js/**/*.js',
-    filename: 'app.js',
-    dest: 'public/dist',
-    options: {
-
-    },
-
-    watch: {
-      src: 'public/js/**/*.js',
-      exec: ['js']
     }
   }
 };
 
-gulp.task('default', function() {
-  gulp.run('test');
-  gulp.run('watch');
-});
+gulp.task('default', ['test', 'build']);
+gulp.task('build', ['fonts', 'css', 'bundle']);
 
 gulp.task('test', function() {
   return gulp.src(src.test.src, {read: false})
@@ -100,14 +82,8 @@ gulp.task('test', function() {
 gulp.task('bundle', function() {
   return gulp.src(src.browserify.src)
     .pipe(plugins.browserify(src.browserify.options))
-    .pipe(plugins.rename('app.js'))
-    .pipe(gulp.dest('public/dist/'));
-});
-
-gulp.task('js', function() {
-  return gulp.src(src.scripts.src)
-    .pipe(plugins.concat(src.scripts.filename))
-    .pipe(gulp.dest(src.scripts.dest));
+    .pipe(plugins.rename(src.browserify.destFilename))
+    .pipe(gulp.dest(src.browserify.destFolder));
 });
 
 gulp.task('css', function() {
@@ -121,12 +97,9 @@ gulp.task('fonts', function() {
     .pipe(plugins.copy(src.fonts.dest, src.fonts.options))
 });
 
-gulp.task('build', ['fonts', 'css', 'bundle']);
-
 gulp.task('watch', ['bundle'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
-  // gulp.watch(src.scripts.watch.src, src.scripts.watch.exec);
   gulp.watch(src.browserify.watch.src, src.browserify.watch.exec);
 });
 

@@ -1,6 +1,5 @@
 should = require 'should'
-lib = require '../lib'
 
-describe 'LibSpec', ->
+describe 'TestSpec', ->
   it 'should pass', ->
-    lib.testItem.should.equal('testing')
+    true.should.be.ok
