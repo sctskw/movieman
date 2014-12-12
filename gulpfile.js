@@ -43,6 +43,19 @@ var src = {
     }
   },
 
+  fonts: {
+    src: [
+      './public/vendor/bootstrap/fonts/*',
+      './public/vendor/fontawesome/fonts/*'
+    ],
+
+    dest: 'public/dist/fonts',
+
+    options: {
+      prefix: 4
+    }
+  },
+
   less: {
     src: './public/styles/app.less',
     dest: './public/dist/',
@@ -103,10 +116,18 @@ gulp.task('css', function() {
     .pipe(gulp.dest(src.less.dest));
 });
 
+gulp.task('fonts', function() {
+  return gulp.src(src.fonts.src)
+    .pipe(plugins.copy(src.fonts.dest, src.fonts.options))
+});
+
+gulp.task('build', ['fonts', 'css', 'bundle']);
+
 gulp.task('watch', ['bundle'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
   // gulp.watch(src.scripts.watch.src, src.scripts.watch.exec);
   gulp.watch(src.browserify.watch.src, src.browserify.watch.exec);
 });
+
 
