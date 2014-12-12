@@ -5,5 +5,15 @@ html
     link(rel='stylesheet', href='/dist/app.css')
     script(src="/dist/app.js")
   body
+    #content
     block content
+    script.
+      (function() {
+        App.start({
+            viewEl: '#content',
+            user: {
+              name: "#{user}"
+            }
+        });
+      })();
 

@@ -1,11 +1,9 @@
-var Backbone = require('backbone');
+var BaseView = require('./base');
 
-module.exports = Backbone.View.extend({
-
-  template: '<h1>Login Page!</h1>',
+module.exports = BaseView.extend({
 
   render: function() {
-    this.$el.html(this.template);
+    this.$el.html(this.$html('#login-form'));
     return this;
   }
 });

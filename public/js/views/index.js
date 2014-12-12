@@ -1,11 +1,12 @@
-var Backbone = require('backbone');
+var BaseView = require('./base');
+var _ = require('underscore');
 
-module.exports = Backbone.View.extend({
-
-  template: '<h1>Index Page</h1>',
+module.exports = BaseView.extend({
 
   render: function() {
-    this.$el.html(this.template);
+    var user = this.getUser();
+    var template = _.template(this.$html('#welcome-banner'));
+    this.$el.html(template({name: user.name}));
     return this;
   }
 });

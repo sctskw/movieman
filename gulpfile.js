@@ -31,7 +31,7 @@ var src = {
   },
 
   browserify: {
-    src: 'public/js/index.js',
+    src: 'public/js/app.js',
     dest: 'public/dist',
     options: {
       insertGlobals: true,
@@ -103,7 +103,7 @@ gulp.task('css', function() {
     .pipe(gulp.dest(src.less.dest));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['bundle'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
   // gulp.watch(src.scripts.watch.src, src.scripts.watch.exec);

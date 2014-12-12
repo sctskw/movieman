@@ -15036,18 +15036,26 @@ return jQuery;
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/underscore/underscore.js","/../../node_modules/underscore")
 },{"buffer":3,"oMfpAn":6}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-var _ = require('underscore');
 var Backbone = require('backbone');
+var _ = require('underscore');
+var $ = require('jquery');
+
+//store jquery dependency
+Backbone.$ = $;
+
+//import routing
 var Router = require('./router');
 
+//create app namespace
 var App = {};
+global.App = App;
 
+//function to bootstrap application
 App.start = function(config) {
-  var opts = _.extend({}, config);
-  var router = new Router();
+  console.log('starting application...');
+  var opts = _.extend({}, config || {});
+  var routing = new Router(opts);
   Backbone.history.start({pushState: true});
-
-  console.log('application bootstrapped...');
 };
 
 module.exports = App;
@@ -15056,44 +15064,57 @@ module.exports = App;
 
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app.js","/")
-},{"./router":11,"backbone":1,"buffer":3,"oMfpAn":6,"underscore":8}],10:[function(require,module,exports){
+},{"./router":11,"backbone":1,"buffer":3,"jquery":7,"oMfpAn":6,"underscore":8}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Backbone = require('backbone');
 Backbone.$ = require('jquery'); //allow backbone access to jquery
 
 var App = require('./app');
 
-//when document is ready, start rendering
-Backbone.$(function() {
-  App.start({viewEl: '#content'});
-});
+module.exports = App;
 
 
 
-
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_3f3a7de7.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_2a72eb98.js","/")
 },{"./app":9,"backbone":1,"buffer":3,"jquery":7,"oMfpAn":6}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Backbone = require('backbone');
 var _ = require('underscore');
 
 //import views
+var indexView = require('./views/index');
 var loginView = require('./views/login');
 
 var Router = Backbone.Router.extend({
 
-  viewEl: '#content',
+  _defaults: {
+    viewEl: 'body' //graceful fail
+  },
+
+  initialize: function(cfg) {
+    console.log('initializing routing');
+    this.configs = _.extend(this._defaults, cfg || {});
+  },
 
   routes: {
-    "": "showLogin"
+    "": "showIndex",
+    "login": "showLogin"
+  },
+
+  showIndex: function() {
+    console.log('rendering index view');
+    this._renderView(new indexView(this.configs));
   },
 
   showLogin: function() {
-    this._renderView(new loginView());
+    console.log('rendering login view...');
+    this._renderView(new loginView(this.configs));
   },
 
   _renderView: function(view) {
-    Backbone.$(this.viewEl).html(view.render().el);
+    console.log('rendering a view...');
+    var el = Backbone.$(this.configs.viewEl);
+    el.html(view.render().el);
   }
 });
 
@@ -15101,19 +15122,59 @@ var Router = Backbone.Router.extend({
 module.exports = Router;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/router.js","/")
-},{"./views/login":12,"backbone":1,"buffer":3,"oMfpAn":6,"underscore":8}],12:[function(require,module,exports){
+},{"./views/index":13,"./views/login":14,"backbone":1,"buffer":3,"oMfpAn":6,"underscore":8}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var Backbone = require('backbone');
+var _ = require('underscore');
 
+
+//helper class for all future views
 module.exports = Backbone.View.extend({
 
-  template: '<h1>Login Page!</h1>',
+  _defaults: {},
+
+  initialize: function(cfg) {
+    this.configs = _.extend(this._defaults, cfg || {});
+  },
+
+  getUser: function() {
+    return this.configs.user || {};
+  },
+
+  //helper function to return html from DOM templates
+  $html: function(selector) {
+    return Backbone.$(selector).html();
+  }
+});
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/views/base.js","/views")
+},{"backbone":1,"buffer":3,"oMfpAn":6,"underscore":8}],13:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var BaseView = require('./base');
+var _ = require('underscore');
+
+module.exports = BaseView.extend({
 
   render: function() {
-    this.$el.html(this.template);
+    var user = this.getUser();
+    var template = _.template(this.$html('#welcome-banner'));
+    this.$el.html(template({name: user.name}));
+    return this;
+  }
+});
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/views/index.js","/views")
+},{"./base":12,"buffer":3,"oMfpAn":6,"underscore":8}],14:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var BaseView = require('./base');
+
+module.exports = BaseView.extend({
+
+  render: function() {
+    this.$el.html(this.$html('#login-form'));
     return this;
   }
 });
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/views/login.js","/views")
-},{"backbone":1,"buffer":3,"oMfpAn":6}]},{},[10])
+},{"./base":12,"buffer":3,"oMfpAn":6}]},{},[10])
