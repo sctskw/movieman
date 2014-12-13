@@ -12,10 +12,7 @@ var app = express();
 //setup globals
 app.globals = require('./globals.js');
 
-var routes = require('./routes/index');
 var auth = require('./auth');
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +34,8 @@ app.use(session({
 }));
 auth.configure(app);
 
-app.use('/', routes);
+app.use('/', require('./routes/index'));
+app.use('/api', require('./api/routes'));
 
 
 // catch 404 and forward to error handler

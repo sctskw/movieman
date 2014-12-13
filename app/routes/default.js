@@ -1,4 +1,4 @@
-var auth = require('../auth');
+var auth = require(__basedir + 'auth');
 
 /* GET home page. */
 function index(req, res) {

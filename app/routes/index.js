@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var appRoutes = require('./app');
-var apiRoutes = require('./api');
+var appRoutes = require('./default');
 
 //index
 router.route('/')
@@ -16,8 +15,5 @@ router.route('/login')
 //logout
 router.route('/logout')
   .get(appRoutes.logout);
-
-//api
-router.use('/api', apiRoutes);
 
 module.exports = router;

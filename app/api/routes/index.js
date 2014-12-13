@@ -8,7 +8,6 @@ function index(req, res) {
   res.json({message: 'success', success: true});
 }
 
-
 //declare api routes
 router.get('/', index);
 
