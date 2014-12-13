@@ -6,10 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+//declare app
+var app = express();
+
+//setup globals
+app.globals = require('./globals.js');
+
 var routes = require('./routes/index');
 var auth = require('./auth');
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,7 +38,6 @@ app.use(session({
 auth.configure(app);
 
 app.use('/', routes);
-
 
 
 // catch 404 and forward to error handler

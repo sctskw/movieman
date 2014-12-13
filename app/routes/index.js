@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../auth');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Home'});
-});
+var appRoutes = require('./app');
+var apiRoutes = require('./api');
 
+//index
+router.route('/')
+  .get(appRoutes.index);
+
+//login
 router.route('/login')
-  .get(function(req, res) {
-    res.render('login');
-  })
-  .post(auth.authenticate);
+  .get(appRoutes.login)
+  .post(appRoutes.authenticate);
 
-router.get('/logout', function(req, res) {
-  delete req.user;
-  delete req.session.user;
-  res.redirect('/');
-});
+//logout
+router.route('/logout')
+  .get(appRoutes.logout);
+
+//api
+router.use('/api', apiRoutes);
 
 module.exports = router;
