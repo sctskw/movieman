@@ -26,13 +26,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './public/dist')));
 
-//setup authentication
+//setup session handling
 app.use(session({
   secret: 'QEUREIO12121',
   resave: true,
   saveUninitialized: true
 }));
-auth.configure(app);
+
+//configure auth
+auth.configure(app, ['/api']);
 
 app.use('/', require('./routes/index'));
 app.use('/api', require('./api/routes'));

@@ -30,22 +30,22 @@ function moviesById(req, res, next) {
 
 //CREATE - store a new movie in DB
 function createMovie(req, res) {
-  //@TODO
+  res.send(movies.create(req.body));
 }
 
 //READ - retrieve an existing movie from the DB
 function readMovie(req, res) {
-  //@TODO
+  res.send(movies.read(req.params.id));
 }
 
 //UPDATE - modify an existing movie in the DB
 function updateMovie(req, res) {
-  //@TODO
+  res.send(movies.update(req.params.id, req.body))
 }
 
 //DESTROY - remove an existing movie from the DB
 function deleteMovie(req, res) {
-  //@TODO
+  res.send(movies.destroy(req.params.id));
 }
 
 module.exports = {
