@@ -28,26 +28,26 @@ var src = {
   },
 
   browserify: {
-    src: './public/src/js/app.js',
-    destFolder: './public/dist/',
+    src: './app/public/src/js/app.js',
+    destFolder: './app/public/dist/',
     destFilename: 'app.js',
     options: {
       insertGlobals: true,
       debug: false
     },
     watch: {
-      src: ['public/src/js/**/*.js'],
+      src: ['app/public/src/js/**/*.js'],
       exec: ['bundle']
     }
   },
 
   fonts: {
     src: [
-      './public/vendor/bootstrap/fonts/*',
-      './public/vendor/fontawesome/fonts/*'
+      './app/public/vendor/bootstrap/fonts/*',
+      './app/public/vendor/fontawesome/fonts/*'
     ],
 
-    dest: 'public/dist/fonts',
+    dest: 'app/public/dist/fonts',
 
     options: {
       prefix: 4
@@ -55,16 +55,16 @@ var src = {
   },
 
   less: {
-    src: './public/src/styles/app.less',
-    dest: './public/dist/',
+    src: './app/public/src/styles/app.less',
+    dest: './app/public/dist/',
     options: {
       paths: [
-        'public/styles'
+        'app/public/styles'
       ],
       filename: 'styles.css'
     },
     watch: {
-      src: './public/src/styles/**/*.less',
+      src: './app/public/src/styles/**/*.less',
       exec: ['css']
     }
   }
