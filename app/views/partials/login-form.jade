@@ -1,0 +1,13 @@
+#login.panel.panel-default(role="form")
+  form(action="/login", method="post")
+    div.panel-heading
+      h4 Welcome! Please sign in:
+    div.panel-body
+      input.form-control(
+        type="text", name="username", placeholder="Username")
+      input.form-control(
+        type="password", name="password", placeholder="Password")
+    hr
+    button.btn.btn-lg.btn-success(type="submit")
+      i.fa.fa-unlock &nbsp;
+      span.btn-text Sign Me In

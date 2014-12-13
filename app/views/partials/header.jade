@@ -1,0 +1,10 @@
+header
+  h1.brand
+    span.brand-text MovieMan
+  div.header-tools
+    <% if (username) {%>
+    span.user-greeting Hello <%= username %>
+    a.settings-link(href="/settings") settings
+    a.logout-link(href="/logout") logout
+    <% } %>
+
