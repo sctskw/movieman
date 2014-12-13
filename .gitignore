@@ -1,4 +1,4 @@
 node_modules
-public/vendor
-public/dist
+**/*/public/vendor
+**/*/public/dist
 **/*/npm-debug.log
