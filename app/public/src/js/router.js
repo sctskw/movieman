@@ -2,14 +2,21 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 
 //import views
+var Viewport = require('./views/viewport');
 var IndexView = require('./views/index');
 var LoginView = require('./views/login');
-var Viewport = require('./views/viewport');
+var SearchView = require('./views/search');
 
 var Router = Backbone.Router.extend({
 
   _defaults: {
     viewEl: 'body' //graceful fail
+  },
+
+  routes: {
+    "": "showIndex",
+    "login": "showLogin",
+    "search/:term": "showSearchResults"
   },
 
   initialize: function(cfg) {
@@ -24,11 +31,6 @@ var Router = Backbone.Router.extend({
     viewport.render();
   },
 
-  routes: {
-    "": "showIndex",
-    "login": "showLogin"
-  },
-
   showIndex: function() {
     console.log('rendering index view');
     this._renderView(new IndexView(this.configs));
@@ -37,6 +39,17 @@ var Router = Backbone.Router.extend({
   showLogin: function() {
     console.log('rendering login view...');
     this._renderView(new LoginView(this.configs));
+  },
+
+  showSearchResults: function(searchTerm) {
+    console.log('rendering search results view...');
+
+    //create config for search view
+    var cfg = _.extend({
+      searchTerm: searchTerm //pass search term to view
+    }, this.configs);
+
+    this._renderView(new SearchView(cfg));
   },
 
   _renderView: function(view, selector) {

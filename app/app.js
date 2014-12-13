@@ -36,16 +36,10 @@ app.use(session({
 //configure auth
 auth.configure(app, ['/api']);
 
-app.use('/', require('./routes/index'));
+app.use(require('./routes/index')); //default routing
 app.use('/api', require('./api/routes'));
 
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
 
 // error handlers
 

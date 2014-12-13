@@ -3,9 +3,6 @@ var router = express.Router();
 
 var appRoutes = require('./default');
 
-//index
-router.route('/')
-  .get(appRoutes.index);
 
 //login
 router.route('/login')
@@ -15,5 +12,9 @@ router.route('/login')
 //logout
 router.route('/logout')
   .get(appRoutes.logout);
+
+
+//index -- default route
+router.use(appRoutes.index);
 
 module.exports = router;

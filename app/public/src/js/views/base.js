@@ -20,5 +20,8 @@ module.exports = Backbone.View.extend({
   //helper function to return html from DOM templates
   $html: function(selector) {
     return Backbone.$(selector).html();
-  }
+  },
+
+  //helper function to create a template func
+  $tpl: _.template
 });

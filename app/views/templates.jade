@@ -1,11 +1,14 @@
 script(type="text/template", id="tpl-header")
-  include templates/header.jade
+  include partials/header.jade
 
 script(type="text/template", id="tpl-footer")
-  include templates/footer.jade
+  include partials/footer.jade
 
 script(type="text/template", id="tpl-login-form")
-  include templates/login-form.jade
+  include partials/login-form.jade
 
 script(type="text/template", id="tpl-welcome-banner")
   h2 Welcome! Check out your movies!
+
+script(type="text/template", id="tpl-search-results")
+  include partials/search-results.jade
