@@ -36,8 +36,8 @@ app.use(session({
 //configure auth
 auth.configure(app, ['/api']);
 
-app.use(require('./routes/index')); //default routing
 app.use('/api', require('./api/routes'));
+app.use(require('./routes/index')); //default routing
 
 
 
