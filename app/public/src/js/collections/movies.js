@@ -1,14 +1,10 @@
-var Backbone = require('backbone');
+var BaseCollection = require('./base');
 var Movie = require('../models/movie');
 
-module.exports = Backbone.Collection.extend({
+module.exports = BaseCollection.extend({
 
   model: Movie,
 
-  url: '/api/movies/',
-
-  parse: function(resp, opts) {
-    return resp.data;
-  }
+  url: '/api/movies/'
 
 });

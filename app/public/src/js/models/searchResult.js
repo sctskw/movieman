@@ -1,11 +1,7 @@
-var Backbone = require('backbone');
+var BaseModel = require('./base');
 
-module.exports = Backbone.Model.extend({
+module.exports = BaseModel.extend({
   url: function() {
     return '/api/movies/search/id/' + this.id;
-  },
-
-  parse: function(resp) {
-    return resp.data;
   }
 });

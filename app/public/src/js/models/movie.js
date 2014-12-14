@@ -1,8 +1,5 @@
-var Backbone = require('backbone');
+var BaseModel = require('./base');
 
-module.exports = Backbone.Model.extend({
-  urlRoot: '/api/movies/',
-  parse: function(resp) {
-    return resp.data;
-  }
+module.exports = BaseModel.extend({
+  urlRoot: '/api/movies/'
 });
