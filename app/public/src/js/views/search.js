@@ -26,7 +26,7 @@ module.exports = BaseView.extend({
 
     //fetch results
     this.results.fetch().then(function(results){
-      self.renderSearchResults(results);
+      self.renderSearchResults(results.data);
     });
   },
 
@@ -38,7 +38,9 @@ module.exports = BaseView.extend({
     //request movie data from api and save it in the collection
     this.$.ajax({
       url: $event.currentTarget.href
-    }).done(function(json) {
+    }).done(function(resp) {
+      var json = resp.data;
+      console.log(resp);
       json.user = self.getUser().name; //store username
       json._id = json.id; //rename id tag
       delete json.id; //remove id to allow POST

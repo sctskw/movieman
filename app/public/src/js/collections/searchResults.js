@@ -11,5 +11,9 @@ module.exports = Backbone.Collection.extend({
 
   url: function() {
     return '/api/movies/search/title/' + this.searchTerm;
+  },
+
+  parse: function(resp, opts) {
+    return resp.data;
   }
 });

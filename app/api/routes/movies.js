@@ -2,7 +2,6 @@ var movies = require(__basedir + 'api/movies');
 
 //return a list of movie suggestions by title
 function moviesByTitle(req, res, next) {
-  console.log('searching movies for..');
   movies.search.byTitle(req.params.title)
     .then(function(data) {
       res.body = data;

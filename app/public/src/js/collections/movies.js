@@ -5,6 +5,10 @@ module.exports = Backbone.Collection.extend({
 
   model: Movie,
 
-  url: '/api/movies/'
+  url: '/api/movies/',
+
+  parse: function(resp, opts) {
+    return resp.data;
+  }
 
 });
