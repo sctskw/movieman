@@ -10,6 +10,10 @@ module.exports = Backbone.View.extend({
   _defaults: {},
 
   initialize: function(cfg) {
+    this.initConfigs(cfg);
+  },
+
+  initConfigs: function(cfg) {
     this.configs = _.extend(this._defaults, cfg || {});
   },
 

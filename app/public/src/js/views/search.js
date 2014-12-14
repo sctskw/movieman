@@ -1,10 +1,21 @@
 var BaseView = require('./base');
 var SearchResults = require('../collections/searchResults');
+var MovieCollection = require('../collections/movies');
+
+//create collection
+var Movies = new MovieCollection();
 
 module.exports = BaseView.extend({
 
+  events: {
+    "click .favorite": "onFavorite"
+  },
+
   initialize: function(cfg) {
     var self = this;
+
+    //setup configs
+    this.initConfigs(cfg);
 
     this.searchTerm = cfg.searchTerm;
 
@@ -16,6 +27,25 @@ module.exports = BaseView.extend({
     //fetch results
     this.results.fetch().then(function(results){
       self.renderSearchResults(results);
+    });
+  },
+
+  onFavorite: function($event) {
+    var self = this;
+
+    $event.preventDefault(); //stop href from firing
+    var href = $event.currentTarget.href; //data url
+
+    console.log(this);
+
+    //request movie data from api and save it in the collection
+    this.$.ajax({
+      url: href
+    }).done(function(json) {
+      json.user = self.getUser().name;
+      json._id = json.id;
+      delete json.id;
+      Movies.create(json);
     });
   },
 
