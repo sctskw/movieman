@@ -1,3 +1,4 @@
+var Promises = require('bluebird');
 var rotten = require('tomatoes')('pm6h7hhqmxd4rawgbvtuyux3');
 var loki = require('lokijs');
 var db = new loki(__basedir + 'db.json');
@@ -16,13 +17,34 @@ db.loadDatabase(function() {
 });
 
 //search RottenTomatoes for movie title
-function searchByTitle(title, callback) {
-  rotten.search(title, callback);
+function searchByTitle(title) {
+  return new Promises(function(resolve, reject) {
+    console.log('searching for movie title ' + title);
+    rotten.search(title, function(err, data) {
+      return err ? reject(err) : resolve(data);
+    });
+  });
 }
 
 //search RottenTomatoes for movie ID
-function getById(id, callback) {
-  rotten.get(id, callback);
+function getById(id) {
+  return new Promises(function(resolve, reject) {
+    console.log('searching for movie id ' + id);
+    rotten.get(id, function(err, data) {
+      return err ? reject(err) : resolve(data);
+    });
+  });
+}
+
+//search db for movies for a particular user
+function getByUser(username) {
+  return new Promises(function(resolve, reject) {
+    try{
+      return resolve(moviedb.find({user: username}));
+    } catch( err ) {
+      return reject(err);
+    }
+  });
 }
 
 //store a movie in the db
@@ -48,9 +70,10 @@ function updateMovie(id, data) {
 
 //remove a movie from the db
 function deleteMovie(id) {
-  var row = moviedb.remove(id);
+  console.log('deleting movie ' + id);
+  moviedb.remove(readMovie(id));
   db.saveToDisk();
-  return row;
+  return true;
 }
 
 module.exports = {
@@ -58,6 +81,8 @@ module.exports = {
     byTitle: searchByTitle,
     byId: getById
   },
+
+  byUser: getByUser,
 
   create: createMovie,
   read: readMovie,

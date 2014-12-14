@@ -34,18 +34,15 @@ module.exports = BaseView.extend({
     var self = this;
 
     $event.preventDefault(); //stop href from firing
-    var href = $event.currentTarget.href; //data url
-
-    console.log(this);
 
     //request movie data from api and save it in the collection
     this.$.ajax({
-      url: href
+      url: $event.currentTarget.href
     }).done(function(json) {
-      json.user = self.getUser().name;
-      json._id = json.id;
-      delete json.id;
-      Movies.create(json);
+      json.user = self.getUser().name; //store username
+      json._id = json.id; //rename id tag
+      delete json.id; //remove id to allow POST
+      Movies.create(json); //POST movie data
     });
   },
 
