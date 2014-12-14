@@ -14,19 +14,34 @@ module.exports = BaseView.extend({
     });
 
     //fetch results
-    this.results.fetch().then(function(){
-      self.renderSearchResults();
+    this.results.fetch().then(function(results){
+      self.renderSearchResults(results);
     });
   },
 
-  renderSearchResults: function() {
+  //hide the loading indicator
+  stopLoading: function() {
+    this.$('#search-loader').hide();
+  },
+
+  //show the loading indicator
+  startLoading: function() {
+    this.$('#search-loader').show();
+  },
+
+  renderSearchResults: function(results) {
     var html = this.$html('#tpl-search-results');
     var template = this.$tpl(html);
 
+    //hide the loading indicator
+    this.stopLoading();
+
+    //render results list
     this.$('#search-results').append(template({
       searchTerm: this.searchTerm,
-      results: this.results.models
+      results: results
     }));
+
 
   },
 

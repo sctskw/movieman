@@ -50,7 +50,7 @@ var src = {
     dest: 'app/public/dist/fonts',
 
     options: {
-      prefix: 4
+      prefix: 5
     }
   },
 

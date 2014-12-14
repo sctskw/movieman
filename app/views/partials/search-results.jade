@@ -6,15 +6,15 @@ ul.movie-list
   <% _.each(results, function(movie) {%>
   li.movie-item
     div.movie-thumbnail
-      | <img width="55" src="<%= movie.attributes.posters.thumbnail%>" />
+      | <img width="55" src="<%= movie.posters.thumbnail%>" />
     div.movie-details
       div.movie-title
-        span <%= movie.attributes.title %>
+        span <%= movie.title %>
       div.movie-year
         label Released:&nbsp;
-        em <%= movie.attributes.year %>
+        em <%= movie.year %>
       div.movie-rating
         label User Rating:&nbsp;
-        span <%= movie.attributes.ratings.audience_score %>%
+        span.rating-text <%= movie.ratings.audience_score %>%
 
   <% }); %>

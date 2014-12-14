@@ -3,6 +3,16 @@
   width: 600px
 }
 
+#search-loader {
+  margin-top: 200px;
+  font-size: 2em;
+
+  .loading-icon {
+    float: left;
+    width: 50px;
+  }
+}
+
 .movie-list {
   padding: 0;
   position: relative;
@@ -28,6 +38,13 @@
     font-weight: bold;
   }
 
-  .movie-year {
+  .movie-year, .movie-rating {
+    .text-muted();
+  }
+
+  .movie-rating {
+    .rating-text {
+      color: @brand-warning;
+    }
   }
 }
