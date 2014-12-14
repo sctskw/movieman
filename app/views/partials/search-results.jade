@@ -5,16 +5,24 @@ hr
 ul.movie-list
   <% _.each(results, function(movie) {%>
   li.movie-item
+    div.movie-tools
+      a.favorite(href="/api/movies/")
+        i.favorite-icon
+      | <a class="lookup", href="/api/movies/search/id/<%= movie.id %>">
+      | <i class="lookup-icon"></i>
+      | </a>
     div.movie-thumbnail
       | <img width="55" src="<%= movie.posters.thumbnail%>" />
     div.movie-details
       div.movie-title
         span <%= movie.title %>
-      div.movie-year
-        label Released:&nbsp;
-        em <%= movie.year %>
-      div.movie-rating
-        label User Rating:&nbsp;
-        span.rating-text <%= movie.ratings.audience_score %>%
-
+      div.movie-subdetails
+        div.movie-year
+          label Released:&nbsp;
+          em <%= movie.year %>
+        div.movie-rating
+          label User Rating:&nbsp;
+          span.rating-text <%= movie.ratings.audience_score %>%
   <% }); %>
+
+

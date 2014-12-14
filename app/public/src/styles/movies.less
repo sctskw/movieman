@@ -20,17 +20,25 @@
   list-style-type: none;
 
   .movie-item {
+    &:extend(.well all);
     height: 125px;
+    padding-left: 20px;
+    position: relative;
   }
 
   .movie-thumbnail {
     float: left;
     height: 110px;
+    margin-top: 5px;
     width: 75px
   }
 
   .movie-details {
     margin-left: 20px;
+  }
+
+  .movie-subdetails {
+    margin: 10px 0px 0px 85px;
   }
 
   .movie-title {
@@ -45,6 +53,37 @@
   .movie-rating {
     .rating-text {
       color: @brand-warning;
+    }
+  }
+
+  .movie-tools {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    a {
+      display: inline-block;
+      font-size: 1.5em;
+      width: 30px;
+    }
+
+    .lookup {
+      .lookup-icon {
+        &:extend(.fa, .fa-search all);
+      }
+
+      &:hover {
+        color: @brand-warning;
+      }
+    }
+
+    .favorite-icon {
+      &:extend(.fa, .fa-heart-o all);
+
+      &:hover {
+        &:extend(.fa-heart all);
+        color: @brand-danger;
+      }
     }
   }
 }
