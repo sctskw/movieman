@@ -21,6 +21,10 @@ module.exports = Backbone.View.extend({
     return this.configs.user || {};
   },
 
+  getUserName: function() {
+    return this.getUser().username;
+  },
+
   //helper function to return html from DOM templates
   $html: function(selector) {
     return Backbone.$(selector).html();

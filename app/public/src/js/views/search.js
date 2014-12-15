@@ -1,11 +1,12 @@
 var BaseView = require('./base');
 var SearchResults = require('../collections/searchResults');
 var MovieCollection = require('../collections/movies');
-var SearchBar = require('./searchBar');
+var SearchBar = require('./partials/searchBar');
 
-//create collection
+//create movie collection
 var Movies = new MovieCollection();
 
+//Class SearchView
 module.exports = BaseView.extend({
 
   events: {
@@ -18,6 +19,7 @@ module.exports = BaseView.extend({
     //setup configs
     this.initConfigs(cfg);
 
+    //cache search term
     this.searchTerm = cfg.searchTerm;
 
     //fetch search results
@@ -31,6 +33,7 @@ module.exports = BaseView.extend({
     });
   },
 
+  //fires when user clicks favorite icon
   onFavorite: function($event) {
     var self = this;
 
@@ -40,16 +43,20 @@ module.exports = BaseView.extend({
     this.$.ajax({
       url: $event.currentTarget.href
     }).done(function(resp) {
+
+      //configure POST data
       var json = resp.data;
-      json.user = self.getUser().name; //store username
+      json.user = self.getUserName(); //store username
       json._id = json.id; //rename id tag
       delete json.id; //remove id to allow POST
+
+      //POST movie to db
       Movies.create(json, {
         wait: true,
         success: function() {
-          App.routes.navigate('/', true);
+          App.routes.navigate('/', true); //redirect to index
         }
-      }); //POST movie data
+      });
     });
   },
 
@@ -74,20 +81,21 @@ module.exports = BaseView.extend({
     this.renderSearchBar(); //so user can search again
 
     //render results list
-    this.$('#search-results').append(template({
+    this.$el.find('#search-results').append(template({
       searchTerm: this.searchTerm,
       results: results
     }));
 
   },
 
+  //render partial that is the search input
   renderSearchBar: function() {
     var searchBar = new SearchBar();
     this.$el.prepend(searchBar.render().el);
   },
 
+  //render the view
   render: function() {
-
     var html = this.$html('#tpl-search-view');
     var template = this.$tpl(html);
 

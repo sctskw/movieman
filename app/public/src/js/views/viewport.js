@@ -22,9 +22,8 @@ module.exports = BaseView.extend({
 
   //render the header as a partial
   _renderHeader: function() {
-    var user = this.getUser();
     this._renderPartial('#tpl-header', {
-      username: user.name
+      username: this.getUserName()
     });
 
     return this;

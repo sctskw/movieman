@@ -1,6 +1,6 @@
 var BaseView = require('./base');
 var UserMovies = require('../collections/userMovies');
-var SearchBar = require('../views/searchBar');
+var SearchBar = require('./partials/searchBar');
 
 module.exports = BaseView.extend({
 
@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
 
     this.initConfigs(cfg);
 
-    var user = this.getUser().name;
+    var user = this.getUserName();
 
     this.movies = new UserMovies({user: user});
 

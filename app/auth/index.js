@@ -1,9 +1,12 @@
 var _ = require('lodash');
 
+//authenticate a user
 function authenticate(req, res, next) {
   var user = req.body.username;
   var password = req.body.password;
 
+  //@TODO -- need to check credentials against user db
+  //for now, just pass the user through
   req.session.user = user;
   res.redirect('/');
 }
@@ -39,9 +42,12 @@ module.exports = {
         console.log('redirecting to login...');
         res.redirect('/login');
       } else {
-        var user = req.session.user; //@TODO: database query
-        req.user = user;
-        app.locals.user = user;
+        var user = req.session.user;
+        var data = {username: user}; //@TODO: database query
+        req.user = data;
+
+        //pass user data to templates
+        app.locals.user = JSON.stringify(data);
         next();
       }
     });
