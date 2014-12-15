@@ -77,10 +77,9 @@ var src = {
 
 gulp.task('default', ['test', 'build']);
 gulp.task('build', ['fonts', 'css', 'bundle']);
-gulp.task('test', function() {
+gulp.task('test', function(done) {
   var runSequence = require('run-sequence').use(gulp);
-
-  runSequence('test:server', 'test:client');
+  runSequence('test:server', 'test:client', done);
 });
 
 gulp.task('test:client', function() {
