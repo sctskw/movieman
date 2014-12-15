@@ -1,8 +1,8 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
+var runSequence = require('run-sequence');
 var coffee = require('coffee-script/register');
-var karma = require('karma').server;
 
 
 //autoload plugins from node_modules
@@ -13,7 +13,7 @@ var plugins = require('gulp-load-plugins')({
 
 var src = {
   'test': {
-    src: 'tests/serverside/*.coffee',
+    src: 'tests/serverside/**/*.coffee',
     runner: {
       exec: plugins.mocha,
       config: {
@@ -21,6 +21,7 @@ var src = {
       }
     },
     karma: {
+      files: ['tests/clientside/**/*.coffee'],
       configFile: __dirname + '/karma.conf.js',
       singleRun: true
     },
@@ -77,11 +78,17 @@ var src = {
 
 gulp.task('default', ['test', 'build']);
 gulp.task('build', ['fonts', 'css', 'bundle']);
-gulp.task('test', ['test:client', 'test:server']);
+gulp.task('test', function() {
+  runSequence('test:server', ['test:client']);
+});
 
-gulp.task('test:client', function(done) {
+gulp.task('test:client', function() {
   //clientside tests
-  karma.start(src.test.karma, done);
+  return gulp.src(src.test.karma.files)
+    .pipe(plugins.karma(src.test.karma))
+    .on('error', function(err) {
+      throw err;
+    });
 });
 
 gulp.task('test:server', function(done) {
