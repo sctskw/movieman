@@ -81,6 +81,14 @@ var src = {
       src: './app/public/src/styles/**/*.less',
       exec: ['css']
     }
+  },
+
+  server: {
+    options: {
+      script: './app/bin/www',
+      ext: 'jade js less',
+      ignore: ['./app/public/dist/**/*.js']
+    }
   }
 };
 
@@ -129,7 +137,14 @@ gulp.task('fonts', function() {
     .pipe(plugins.copy(src.fonts.dest, src.fonts.options))
 });
 
-gulp.task('watch', ['bundle'], function() {
+gulp.task('server', function() {
+  return plugins.nodemon(src.server.options)
+    .on('restart', function() {
+      console.log('refreshing server');
+    });
+});
+
+gulp.task('watch', ['bundle', 'server'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
   gulp.watch(src.browserify.watch.src, src.browserify.watch.exec);
