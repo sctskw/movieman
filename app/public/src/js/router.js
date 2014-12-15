@@ -23,7 +23,6 @@ var Router = Backbone.Router.extend({
     console.log('initializing routing');
     this.configs = _.extend(this._defaults, cfg || {});
 
-
     //create main viewport
     var viewport = new Viewport(this.configs);
 
@@ -52,8 +51,8 @@ var Router = Backbone.Router.extend({
     this._renderView(new SearchView(cfg));
   },
 
+  //render specified view into selector
   _renderView: function(view, selector) {
-    console.log('rendering a view...');
     var el = Backbone.$(selector || this.configs.viewEl);
     el.html(view.render().el);
   }

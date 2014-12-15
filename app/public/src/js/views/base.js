@@ -1,11 +1,9 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
 
-
+//Class BaseView
 //helper class for all future views
 module.exports = Backbone.View.extend({
-
-  $: Backbone.$,
 
   _defaults: {},
 
@@ -13,14 +11,17 @@ module.exports = Backbone.View.extend({
     this.initConfigs(cfg);
   },
 
+  //cache configuration object
   initConfigs: function(cfg) {
     this.configs = _.extend(this._defaults, cfg || {});
   },
 
+  //return user data
   getUser: function() {
     return this.configs.user || {};
   },
 
+  //return username
   getUserName: function() {
     return this.getUser().username;
   },
@@ -31,5 +32,8 @@ module.exports = Backbone.View.extend({
   },
 
   //helper function to create a template func
-  $tpl: _.template
+  $tpl: _.template,
+
+  //jquery helper
+  $: Backbone.$
 });

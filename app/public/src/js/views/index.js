@@ -2,22 +2,29 @@ var BaseView = require('./base');
 var UserMovies = require('../collections/userMovies');
 var SearchBar = require('./partials/searchBar');
 
+//Class IndexView
+//
 module.exports = BaseView.extend({
 
   initialize: function(cfg) {
     var self = this;
 
+    //cache configs
     this.initConfigs(cfg);
 
+    //get username
     var user = this.getUserName();
 
+    //create movie collection
     this.movies = new UserMovies({user: user});
 
+    //fetch user movies and render results
     this.movies.fetch().done(function(results) {
       self.renderMovieCollection(results.data);
     });
   },
 
+  //populate list of movies
   renderMovieCollection: function(movies) {
     var html = this.$html('#tpl-user-movie-collection');
     var template = this.$tpl(html);
@@ -25,17 +32,15 @@ module.exports = BaseView.extend({
     return this;
   },
 
+  //render search form
   renderSearch: function() {
     var search = new SearchBar();
     this.$el.append(search.render().el);
   },
 
+  //render view
   render: function() {
     this.renderSearch();
-
-    // var user = this.getUser();
-    // var template = this.$tpl(this.$html('#tpl-welcome-banner'));
-    // this.$el.html(template({name: user.name}));
     return this;
   }
 });

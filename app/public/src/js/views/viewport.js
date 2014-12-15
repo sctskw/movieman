@@ -12,11 +12,16 @@ var _ = require('underscore');
  */
 module.exports = BaseView.extend({
 
+  initialize: function(cfg) {
+    this.initConfigs(cfg);
+    this.setElement('body'); //attach to document.body
+  },
+
   //render a partial template to document.body
   _renderPartial: function(templateId, data) {
     var tpl= this.$html(templateId); //retrieve html template from DOM
     var template = _.template(tpl); //convert to template func
-    this.$('body').append(template(data)); //append tpl to document
+    this.$el.append(template(data)); //append tpl to document
     return this;
   },
 
