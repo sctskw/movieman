@@ -2,7 +2,7 @@ var auth = require(__basedir + 'auth');
 
 /* GET home page. */
 function index(req, res) {
-  res.render('index', { title: 'Home'});
+  res.render('index');
 }
 
 //GET: render login view

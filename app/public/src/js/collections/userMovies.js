@@ -1,6 +1,7 @@
 var BaseCollection = require('./base');
 var Movie = require('../models/movie');
 
+//Class UserMovieCollection
 module.exports = BaseCollection.extend({
 
   initialize: function(cfg) {

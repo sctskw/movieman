@@ -12,6 +12,8 @@ var app = express();
 //setup globals
 app.globals = require('./globals.js');
 
+app.locals.title = 'MovieMan';
+
 var auth = require('./auth');
 
 // view engine setup

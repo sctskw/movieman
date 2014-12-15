@@ -1,6 +1,7 @@
 var BaseCollection = require('./base');
 var searchResult = require('../models/searchResult');
 
+//Class SearchResultsCollection
 module.exports = BaseCollection.extend({
 
   model: searchResult,

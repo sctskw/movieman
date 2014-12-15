@@ -7,7 +7,9 @@ var IndexView = require('./views/index');
 var LoginView = require('./views/login');
 var SearchView = require('./views/search');
 
-var Router = Backbone.Router.extend({
+//class Router
+//handles all routing for the application
+module.exports = Backbone.Router.extend({
 
   _defaults: {
     viewEl: 'body' //graceful fail
@@ -57,6 +59,3 @@ var Router = Backbone.Router.extend({
     el.html(view.render().el);
   }
 });
-
-
-module.exports = Router;
