@@ -80,8 +80,7 @@
   width: 60%;
 
   .panel-heading {
-    @background-color: @brand-danger;
-    background-color: @background-color;
+    background-color: @brand-danger;
     color: white;
     text-shadow: 2px 2px @gray-darker;
   }
@@ -113,48 +112,5 @@
   .movie-details {
     width: 65%;
   }
-
-
-  @media screen and (max-width: 450px) {
-    .movie-item {
-      padding: 20px 5px;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .heading-text {
-      display: none;
-    }
-  }
-
-  //responsive
-  @media screen and (max-width: 1250px) {
-
-    .movie-item {
-      width: 20%;
-    }
-
-    .movie-thumbnail {
-      float: none;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .movie-details {
-      padding: 5px;
-      margin: 0;
-      text-align: center;
-      width: 100%;
-    }
-    .movie-title {
-      font-size: 1em;
-      margin: 0 auto;
-      width: auto;
-    }
-    .movie-subdetails {
-      display: none !important;
-    }
-  }
 }
-
-
 
