@@ -1,11 +1,16 @@
 #search-results {
   margin: 0 auto;
   width: 50%;
+
+  .home-link {
+    float: right;
+  }
 }
 
 #search-loader {
   margin: 200px auto;
   font-size: 2em;
+  width: 400px;
 
   .loading-icon {
     float: left;
@@ -91,10 +96,6 @@
     .lookup {
       .lookup-icon {
         &:extend(.fa, .fa-search all);
-      }
-
-      &:hover {
-        color: @brand-warning;
       }
     }
 

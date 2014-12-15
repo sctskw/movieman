@@ -1,6 +1,8 @@
 #user-movies.panel.panel-default
   div.panel-heading
-    h1.heading My Favorites
+    h1.heading
+      i.fa.fa-heart-o
+      span &nbsp;My Favorites
   div.panel-body
     ul.movie-list
       <% _.each(movies, function(movie) {%>
