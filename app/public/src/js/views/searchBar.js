@@ -31,6 +31,7 @@ module.exports = BaseView.extend({
     var html = this.$html('#tpl-search-bar');
     var template = this.$tpl(html);
     this.$el.html(template());
+    this.delegateEvents(); //force event behavior
     return this;
   }
 });

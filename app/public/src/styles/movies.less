@@ -4,7 +4,7 @@
 }
 
 #search-loader {
-  margin-top: 200px;
+  margin: 200px auto;
   font-size: 2em;
 
   .loading-icon {
@@ -35,10 +35,6 @@
   margin: 0;
   list-style-type: none;
 
-  .heading {
-    text-align: center;
-  }
-
   .movie-item {
     &:extend(.well all);
     height: 125px;
@@ -68,7 +64,6 @@
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 70%;
     white-space: nowrap;
   }
 
@@ -116,9 +111,24 @@
 
 #user-movies {
   margin: 50px auto;
-  width: 50%;
+  width: 60%;
+
+  .heading {
+    text-align: center;
+  }
+
+  .movie-list {
+    text-align: center;
+  }
 
   .movie-item {
-    height: 75px;
+    display: inline-block;
+    margin: 10px;
+    text-align: left;
+    width: 40%;
+  }
+
+  .movie-details {
+    width: 50%;
   }
 }
