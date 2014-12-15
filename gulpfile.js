@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
-var runSequence = require('run-sequence');
 var coffee = require('coffee-script/register');
 
 
@@ -79,7 +78,9 @@ var src = {
 gulp.task('default', ['test', 'build']);
 gulp.task('build', ['fonts', 'css', 'bundle']);
 gulp.task('test', function() {
-  runSequence('test:server', ['test:client']);
+  var runSequence = require('run-sequence').use(gulp);
+
+  runSequence('test:server', 'test:client');
 });
 
 gulp.task('test:client', function() {
