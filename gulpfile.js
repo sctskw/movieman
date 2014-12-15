@@ -19,10 +19,12 @@ var src = {
         reporter: 'spec'
       }
     },
-    karma: {
-      files: ['tests/clientside/**/*.coffee'],
-      configFile: __dirname + '/karma.conf.js',
-      singleRun: true
+    client: {
+      files: 'tests/clientside/**/*.js',
+      karma: {
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+      }
     },
     watch: {
       src: [
@@ -39,6 +41,13 @@ var src = {
     options: {
       insertGlobals: true,
       debug: false
+    },
+    test: {
+      destFilename: 'app.test.js',
+      options: {
+        insertGlobals: true,
+        debug: true
+      }
     },
     watch: {
       src: ['app/public/src/js/**/*.js'],
@@ -84,8 +93,12 @@ gulp.task('test', function(done) {
 
 gulp.task('test:client', function() {
   //clientside tests
-  return gulp.src(src.test.karma.files)
-    .pipe(plugins.karma(src.test.karma))
+  //@TODO: convert Coffee to JS before browserifying
+  return gulp.src([src.browserify.src, src.test.client.files])
+    .pipe(plugins.browserify(src.browserify.test.options))
+    .pipe(plugins.rename(src.browserify.test.destFilename))
+    .pipe(gulp.dest(src.browserify.destFolder))
+    .pipe(plugins.karma(src.test.client.karma))
     .on('error', function(err) {
       throw err;
     });

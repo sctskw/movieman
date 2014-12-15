@@ -9,9 +9,10 @@ module.exports = function(config) {
         sourceMap: true
       }
     },
-    frameworks: ['mocha', 'chai'],
-    reporters: ["mocha"],
+    frameworks: ['mocha', 'chai', 'browserify'],
+    reporters: ['mocha'],
     plugins: [
+      "karma-browserify",
       "karma-mocha",
       "karma-chai",
       "karma-jquery",
@@ -19,11 +20,12 @@ module.exports = function(config) {
       "karma-phantomjs-launcher",
       "karma-mocha-reporter",
       "karma-coffee-preprocessor"
-    ]
-    ,
+    ],
+
     files: [
       './tests/clientside/**/*.spec.coffee'
     ],
+
     browsers: ['PhantomJS']
   });
 }
