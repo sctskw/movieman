@@ -6,17 +6,25 @@ module.exports = BaseView.extend({
   id: 'search-bar',
   className: 'search-bar',
 
+  inputSelector: '.search-input',
+
   events: {
-    "submit": "onSearch"
+    "submit": "onSearch", //handles enter key submit
+    "click .submit": "onSearch"
+  },
+
+  getSearchTerm: function() {
+    return this.$el.find(this.inputSelector).val();
+  },
+
+  doSearch: function(term) {
+    //change route
+    App.routes.navigate('/search/' + encodeURIComponent(term), true);
   },
 
   onSearch: function($event) {
     $event.preventDefault();
-    var input = this.$($event.currentTarget).find('.search-input');
-    var term = encodeURIComponent(input.val());
-
-    //change route
-    App.routes.navigate('/search/' + term, true);
+    this.doSearch(this.getSearchTerm());
   },
 
   render: function() {

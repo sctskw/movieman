@@ -1,6 +1,7 @@
 var BaseView = require('./base');
 var SearchResults = require('../collections/searchResults');
 var MovieCollection = require('../collections/movies');
+var SearchBar = require('./searchBar');
 
 //create collection
 var Movies = new MovieCollection();
@@ -26,6 +27,7 @@ module.exports = BaseView.extend({
 
     //fetch results
     this.results.fetch().then(function(results){
+      self.renderSearchBar();
       self.renderSearchResults(results.data);
     });
   },
@@ -40,7 +42,6 @@ module.exports = BaseView.extend({
       url: $event.currentTarget.href
     }).done(function(resp) {
       var json = resp.data;
-      console.log(resp);
       json.user = self.getUser().name; //store username
       json._id = json.id; //rename id tag
       delete json.id; //remove id to allow POST
@@ -76,10 +77,15 @@ module.exports = BaseView.extend({
       results: results
     }));
 
+  },
 
+  renderSearchBar: function() {
+    var searchBar = new SearchBar();
+    this.$el.prepend(searchBar.render().el);
   },
 
   render: function() {
+
     var html = this.$html('#tpl-search-view');
     var template = this.$tpl(html);
 
