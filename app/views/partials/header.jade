@@ -4,6 +4,7 @@ header
   div.header-tools
     <% if (username) {%>
     span.user-greeting Hello <%= username %>
+    a.home-link(href="/") my favorites
     a.settings-link(href="/settings") settings
     a.logout-link(href="/logout") logout
     <% } %>
