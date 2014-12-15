@@ -1,10 +1,13 @@
 #login {
-  .well();
+  &:extend(.well all);
 
   height: 265px;
   margin: 0 auto;
   text-shadow: 2px 1px #ccc;
-  width: 400px;
+
+  width: 40%;
+  max-width: 400px;
+  min-width: 275px;
 
   button[type="submit"] {
     float: right !important;

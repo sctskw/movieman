@@ -4,9 +4,14 @@
       i.heading-icon
       span.heading-text My Favorites
   div.panel-body
+    <% if(movies.length) { %>
     ul.movie-list
-      <% _.each(movies, function(movie) {%>
+      <% _.each(movies, function(movie) { %>
       li.movie-item
         include movie/preview.jade
       <% }) %>
+    <% } else { %>
+    h4
+      em Oops! You don't have any favorites! Start searching!
+    <% } %>
 
