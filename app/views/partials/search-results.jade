@@ -1,29 +1,12 @@
 p.text-muted
-  span Found <%= results.length %> for:
+  span Found <%= results.length %> results for:
   em &nbsp;<%= searchTerm %>
 hr
 ul.movie-list
   <% _.each(results, function(movie) {%>
   li.movie-item
-    div.movie-tools
-      | <a class="favorite" href="/api/movies/search/id/<%= movie.id %>">
-      |   <i class="favorite-icon"></i>
-      | </a>
-      | <a class="lookup", href="/api/movies/search/id/<%= movie.id %>">
-      |   <i class="lookup-icon"></i>
-      | </a>
-    div.movie-thumbnail
-      | <img width="55" height="75" src="<%= movie.posters.thumbnail%>" />
-    div.movie-details
-      div.movie-title
-        span <%= movie.title %>
-      div.movie-subdetails
-        div.movie-year
-          label Released:&nbsp;
-          em <%= movie.year %>
-        div.movie-rating
-          label User Rating:&nbsp;
-          span.rating-text <%= movie.ratings.audience_score %>%
+    include movie/tools.jade
+    include movie/preview.jade
   <% }); %>
 
 
