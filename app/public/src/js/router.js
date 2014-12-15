@@ -15,6 +15,7 @@ module.exports = Backbone.Router.extend({
     viewEl: 'body' //graceful fail
   },
 
+  //setup routes
   routes: {
     "": "showIndex",
     "login": "showLogin",
@@ -32,16 +33,19 @@ module.exports = Backbone.Router.extend({
     viewport.render();
   },
 
+  //index page
   showIndex: function() {
     console.log('rendering index view');
     this._renderView(new IndexView(this.configs));
   },
 
+  //login page
   showLogin: function() {
     console.log('rendering login view...');
     this._renderView(new LoginView(this.configs));
   },
 
+  //search page
   showSearchResults: function(searchTerm) {
     console.log('rendering search results view...');
 

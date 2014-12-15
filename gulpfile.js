@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
 var coffee = require('coffee-script/register');
+var karma = require('karma').server;
 
 
 //autoload plugins from node_modules
@@ -12,12 +13,16 @@ var plugins = require('gulp-load-plugins')({
 
 var src = {
   'test': {
-    src: 'tests/*.coffee',
+    src: 'tests/serverside/*.coffee',
     runner: {
       exec: plugins.mocha,
       config: {
         reporter: 'spec'
       }
+    },
+    karma: {
+      configFile: __dirname + '/karma.conf.js',
+      singleRun: true
     },
     watch: {
       src: [
@@ -72,12 +77,19 @@ var src = {
 
 gulp.task('default', ['test', 'build']);
 gulp.task('build', ['fonts', 'css', 'bundle']);
+gulp.task('test', ['test:client', 'test:server']);
 
-gulp.task('test', function() {
+gulp.task('test:client', function(done) {
+  //clientside tests
+  karma.start(src.test.karma, done);
+});
+
+gulp.task('test:server', function(done) {
+  //serverside test
   return gulp.src(src.test.src, {read: false})
     .pipe(src.test.runner.exec(src.test.runner.config));
-    // .on('error',  gutil.log);
 });
+
 
 gulp.task('bundle', function() {
   return gulp.src(src.browserify.src)
