@@ -44,7 +44,12 @@ module.exports = BaseView.extend({
       json.user = self.getUser().name; //store username
       json._id = json.id; //rename id tag
       delete json.id; //remove id to allow POST
-      Movies.create(json); //POST movie data
+      Movies.create(json, {
+        wait: true,
+        success: function() {
+          App.routes.navigate('/', true);
+        }
+      }); //POST movie data
     });
   },
 

@@ -1,0 +1,8 @@
+#user-movies
+  ul.movie-list
+    h3.heading My Favorites
+    <% _.each(movies, function(movie) {%>
+    li.movie-item
+      span <%= movie.title %>
+    <% }) %>
+

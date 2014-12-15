@@ -13,11 +13,26 @@
   }
 }
 
+.search-bar {
+  &:extend(.form-group all);
+
+  margin: 0 auto;
+  width: 50%;
+
+  .search-input {
+    width: 100%;
+  }
+}
+
 .movie-list {
   padding: 0;
   position: relative;
   margin: 0;
   list-style-type: none;
+
+  .heading {
+    text-align: center;
+  }
 
   .movie-item {
     &:extend(.well all);
@@ -91,5 +106,14 @@
         color: @brand-danger;
       }
     }
+  }
+}
+
+#user-movies {
+  margin: 50px auto;
+  width: 50%;
+
+  .movie-item {
+    height: 75px;
   }
 }

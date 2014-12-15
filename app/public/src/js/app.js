@@ -16,8 +16,11 @@ global.App = App;
 App.start = function(config) {
   console.log('starting application...');
   var opts = _.extend({}, config || {});
-  var routing = new Router(opts);
+
+  this.routes = new Router(opts);
   Backbone.history.start({pushState: true});
+
+  return this;
 };
 
 module.exports = App;
