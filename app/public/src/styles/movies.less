@@ -15,7 +15,7 @@
     float: left;
     height: 75px;
     margin-top: 5px;
-    width: 65px
+    width: 65px;
   }
 
   .movie-details {
@@ -76,6 +76,7 @@
 
 #user-movies {
   margin: 50px auto;
+  min-width: 150px;
   width: 60%;
 
   .panel-heading {
@@ -87,6 +88,14 @@
 
   .heading {
     text-align: center;
+
+    .heading-icon {
+      &:extend(.fa, .fa-heart-o all);
+    }
+
+    .heading-text {
+      margin-left: 10px;
+    }
   }
 
   .movie-list {
@@ -96,6 +105,7 @@
   .movie-item {
     display: inline-block;
     margin: 10px;
+    min-width: 100px;
     text-align: left;
     width: 40%;
   }
@@ -103,4 +113,43 @@
   .movie-details {
     width: 50%;
   }
+
+
+  @media screen and (max-width: 450px) {
+    .movie-item {
+      padding: 20px 5px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .heading-text {
+      display: none;
+    }
+  }
+
+  //responsive
+  @media screen and (max-width: 1250px) {
+    .movie-thumbnail {
+      float: none;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .movie-details {
+      padding: 5px;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+    .movie-title {
+      font-size: 1em;
+      margin: 0 auto;
+      width: auto;
+    }
+    .movie-subdetails {
+      display: none !important;
+    }
+  }
 }
+
+
+

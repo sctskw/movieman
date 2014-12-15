@@ -34,7 +34,6 @@ header {
     .pull-right();
 
     font-size: 1.1em;
-    height: 100px;
     line-height: 50px;
     margin-right: 25px;
     padding: 10px;
@@ -44,6 +43,14 @@ header {
       color: @gray-lighter;
       content: "|";
       padding: 5px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .user-greeting,
+    .home-link,
+    .settings-link {
+      display: none;
     }
   }
 
