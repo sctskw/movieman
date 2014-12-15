@@ -1,0 +1,35 @@
+#search-results {
+  margin: 0 auto;
+  width: 50%;
+
+  .home-link {
+    float: right;
+  }
+}
+
+#search-loader {
+  margin: 200px auto;
+  font-size: 2em;
+  width: 400px;
+
+  .loading-icon {
+    float: left;
+    width: 50px;
+  }
+}
+
+.search-bar {
+  &:extend(.form-group all);
+
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 50%;
+
+  .search-input {
+    width: 100%;
+  }
+
+  .submit {
+    &:extend(.btn-primary all);
+  }
+}
