@@ -27,7 +27,6 @@ module.exports = BaseView.extend({
 
     //fetch results
     this.results.fetch().then(function(results){
-      self.renderSearchBar();
       self.renderSearchResults(results.data);
     });
   },
@@ -70,6 +69,9 @@ module.exports = BaseView.extend({
 
     //hide the loading indicator
     this.stopLoading();
+
+    //render other partials
+    this.renderSearchBar(); //so user can search again
 
     //render results list
     this.$('#search-results').append(template({
