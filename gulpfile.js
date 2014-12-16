@@ -11,7 +11,7 @@ var plugins = require('gulp-load-plugins')({
 });
 
 var src = {
-  'test': {
+  test: {
     src: 'tests/serverside/**/*.coffee',
     runner: {
       exec: plugins.mocha,
@@ -20,11 +20,15 @@ var src = {
       }
     },
     client: {
-      files: 'tests/clientside/**/*.js',
+      files: './tests/clientside/all.tests.js',
+      srcFiles: ['./tests/clientside/**/*.coffee'],
+      destFile: 'all.tests.js',
+      destFolder: './tests/clientside/',
       karma: {
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
-      }
+      },
+      exec: ['concat:tests']
     },
     watch: {
       src: [
@@ -99,7 +103,14 @@ gulp.task('test', function(done) {
   runSequence('test:server', 'test:client', done);
 });
 
-gulp.task('test:client', function() {
+gulp.task('concat:tests', function() {
+  return gulp.src(src.test.client.srcFiles)
+    .pipe(plugins.coffee({bare: true}))
+    .pipe(plugins.concat(src.test.client.destFile))
+    .pipe(gulp.dest(src.test.client.destFolder));
+});
+
+gulp.task('test:client', ['concat:tests'], function() {
   //clientside tests
   //@TODO: convert Coffee to JS before browserifying
   return gulp.src([src.browserify.src, src.test.client.files])
@@ -148,6 +159,7 @@ gulp.task('watch', ['bundle'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
   gulp.watch(src.browserify.watch.src, src.browserify.watch.exec);
+  gulp.watch(src.test.client.files, src.test.client.exec);
 });
 
 

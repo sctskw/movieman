@@ -1,5 +1,7 @@
-require __basedir + 'public/src/js/model/movie'
+MovieModel = require './models/movie'
 
 describe 'ModelTests', ->
-  it 'should pass', ->
-    true.should.equal true
+  describe 'MovieModel', ->
+    it 'should have urlRoot /api/movies/', ->
+      movie = new MovieModel()
+      movie.urlRoot.should.equal '/api/movies/'

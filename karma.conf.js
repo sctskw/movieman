@@ -9,7 +9,8 @@ module.exports = function(config) {
         sourceMap: true
       }
     },
-    frameworks: ['mocha', 'chai'],
+
+    frameworks: ['mocha', 'chai', 'browserify'],
     reporters: ['mocha'],
     plugins: [
       "karma-browserify",
@@ -23,7 +24,7 @@ module.exports = function(config) {
     ],
 
     files: [
-      // './tests/clientside/**/*.spec.coffee'
+      './app/globals.js'
     ],
 
     browsers: ['PhantomJS']
