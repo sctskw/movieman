@@ -31,3 +31,6 @@ npm test
 
 - Search Page Not Remembering Favorites [#2](../../issues/2):
     - Currently, the search page does not show you if you have already favorited a movie. This feature will be added in a future release.
+
+- Minification of Static Files [#3](../../issues/3):
+    - Currently, the Javascript and CSS Stylesheets are not minimized for debugging purposes
