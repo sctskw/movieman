@@ -27,7 +27,7 @@ npm test
 
 
 ### Known Issues
-- Authentication [#1](issues/#1):
+- Authentication [#1](../../issues/#1):
     - Currently, authentication does not check against a user database. You can enter any username/password combination and you will be logged in as that user. Passwords are not saved or stored anywhere.
 
 - Search Page Not Remembering Favorites [#2]:
