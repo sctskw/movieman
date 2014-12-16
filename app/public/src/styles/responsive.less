@@ -1,4 +1,4 @@
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 675px) {
 
   //remove menu items in header tools
   .header-tools {
@@ -16,8 +16,13 @@
   }
 
   #search-results {
+
+    .search-text {
+      .search-term {
+        display: block;
+      }
+    }
     .home-link {
-      float: left !important;
     }
   }
 
@@ -28,6 +33,26 @@
       }
     }
   }
+
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    margin-bottom: 280px !important; //adjust for footer
+  }
+
+  footer {
+    height: 260px !important;
+    .link-list {
+      -webkit-column-count: 1;
+      -moz-column-count: 1;
+      column-count: 1;
+      -webkit-column-gap: .5em;
+      -moz-column-gap: .5em;
+      column-gap: .5em;
+    }
+  }
+
 }
 
 @media screen and (max-width: 1200px) {

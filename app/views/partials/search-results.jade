@@ -1,9 +1,13 @@
-p.text-muted
-  span Found <%= results.length %> results for:
-  em &nbsp;<%= searchTerm %>
-  a.home-link(href="/")
-    i.fa.fa-reply
-    span &nbsp;Back to My Collection
+div.search-info
+  div.search-text.text-muted
+    div.search-phrase
+      span Found <%= results.length %> results for:
+    div.search-term
+      em.search-term <%= searchTerm %>
+  div.search-links
+    a.home-link(href="/")
+      i.fa.fa-reply
+      span &nbsp;Back to My Collection
 hr
 ul.movie-list
   <% _.each(results, function(movie) {%>
