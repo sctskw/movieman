@@ -2,6 +2,7 @@ var BaseView = require('./base');
 var _ = require('underscore');
 
 var tpl = require('./templates/login-form.jade');
+var greetingTpl = require('./templates/login-greeting.jade');
 
 //Class LoginView
 //shows the login form
@@ -16,6 +17,10 @@ module.exports = BaseView.extend({
   events: {
     "submit": "onLogin",
     "change input": "hardReset"
+  },
+
+  initialize: function(cfg) {
+    this.initConfigs(cfg);
   },
 
   //reset error messages
@@ -91,9 +96,15 @@ module.exports = BaseView.extend({
     this.reset(); //purge error list
   },
 
+  renderGreeting: function() {
+    this.$el.append(greetingTpl());
+    return this;
+  },
+
   //render view
   render: function() {
-    this.$el.html(tpl());
+    this.$el.append(tpl());
+    this.renderGreeting();
     return this;
   }
 });
