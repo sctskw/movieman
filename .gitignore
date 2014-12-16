@@ -1,5 +1,5 @@
 node_modules
-**/*/public/vendor
-**/*/public/dist
+app/public/vendor
+app/public/dist
 npm-debug.log
 tests/clientside/all.tests.js

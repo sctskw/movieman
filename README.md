@@ -24,6 +24,10 @@ Username/Password: demo/demo
 npm test
 ```
 
+### Browser Support
+- Chrome **best viewing experience**
+- Firefox
+- Safari
 
 ### Known Issues
 - Authentication [#1](../../issues/1):
