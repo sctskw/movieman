@@ -48,7 +48,10 @@ function getByUser(username) {
 }
 
 function getByUserAndOriginalId(username, id) {
-  return moviedb.find({ user: username, _id: id});
+  console.log('checking ' + username + '\'s collection for movie ' + id);
+  return moviedb.chain().find({ user: username}).where(function(obj) {
+    return obj._id === parseInt(id, 10);
+  }).data();
 }
 
 //retrieve a movie from the db
@@ -63,11 +66,12 @@ function createMovie(data) {
   var row = getByUserAndOriginalId(data.user, data._id);
 
   //make sure users can't duplicate
-  if(!row) {
+  if(!row.length) {
     moviedb.insert(data);
     db.saveToDisk();
   } else {
-    console.log(data.user + ' already favorited ' + data.title);
+    row = row[0];
+    console.log(row.user + ' already favorited ' + row.title);
   }
 
   return row;
