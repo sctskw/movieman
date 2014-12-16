@@ -98,7 +98,12 @@ var src = {
     options: {
       script: './app/bin/www',
       ext: 'jade js less',
-      ignore: ['./app/public/dist/**/*.js']
+      ignore: [
+        './app/public/dist/**/*.js',
+        './app/public/vendor/**/*',
+        './tests/**/*',
+        'node_modules/**/*'
+      ]
     }
   }
 };

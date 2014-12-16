@@ -47,17 +47,30 @@ function getByUser(username) {
   });
 }
 
-//store a movie in the db
-function createMovie(data) {
-  var row = moviedb.insert(data);
-  db.saveToDisk();
-  return row;
+function getByUserAndOriginalId(username, id) {
+  return moviedb.find({ user: username, _id: id});
 }
 
 //retrieve a movie from the db
 function readMovie(id) {
   console.log('retrieving movie ' + id);
   return moviedb.get(parseInt(id, 10));
+}
+
+//store a movie in the db
+function createMovie(data) {
+  //check if user already added it to collection
+  var row = getByUserAndOriginalId(data.user, data._id);
+
+  //make sure users can't duplicate
+  if(!row) {
+    moviedb.insert(data);
+    db.saveToDisk();
+  } else {
+    console.log(data.user + ' already favorited ' + data.title);
+  }
+
+  return row;
 }
 
 //update a movie in the db
