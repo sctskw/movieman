@@ -15,6 +15,10 @@ var src = {
     src: 'tests/serverside/**/*.coffee',
     runner: {
       exec: plugins.mocha,
+      globals: {
+        global: require('./app/globals'),
+        should: require('should')
+      },
       config: {
         reporter: 'spec'
       }
