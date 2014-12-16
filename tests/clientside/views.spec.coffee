@@ -31,10 +31,31 @@ describe 'View Tests', ->
 
     it 'should render movie list', ->
       movies = [
-        {title: 'title1'},
-        {title: 'title2'}
+        {
+          title: 'title1',
+          year: 2014,
+          ratings: {
+            audience_score: 100
+          },
+          posters: {thumbnail: 'blank'}
+        },
+        {
+          title: 'title2',
+          year: 1990,
+          ratings: {
+            audience_score: 90
+          },
+          posters: {thumbnail: 'blank'}
+        }
       ]
-      # console.log(@view.$('#tpl-header'))
-      # console.log(@view.$el.find('#user-movies'))
+      @view.renderMovieCollection(movies)
+      items = @view.$el.find('#user-movies .movie-item')
+      items.length.should.equal 2
+
+      items.each (idx, item) ->
+        title = $(item).find('.movie-title').html()
+        title.should.contain(movies[idx].title)
+
+
 
 

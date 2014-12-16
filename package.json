@@ -1,8 +1,7 @@
 {
-  "name": "",
+  "name": "movieman",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "A simple app to manage and maintain your favorite movie collection.",
   "scripts": {
     "test": "node ./node_modules/gulp/bin/gulp test",
     "start": "node ./node_modules/gulp/bin/gulp build && node ./app/bin/www",
@@ -12,10 +11,12 @@
     "type": "git",
     "url": "https://github.com/sctskw/movieman.git"
   },
-  "keywords": [],
+  "keywords": [
+    "movies"
+  ],
   "author": "Scott Skow",
   "license": "Apache",
-  "homepage": "",
+  "homepage": "http://scottskow.info",
   "dependencies": {
     "express": "~4.9.0",
     "body-parser": "~1.8.1",
@@ -73,8 +74,8 @@
     "karma-html2js-preprocessor": "~0.1.0",
     "gulp-jade": "~0.10.0",
     "jadeify": "~3.1.0",
-    "superagent": "~0.21.0",
-    "supertest": "~0.15.0"
+    "supertest": "~0.15.0",
+    "superagent": "~0.21.0"
   },
   "browser": {
     "bootstrap": "./public/vendor/bootstrap/dist/js/bootstrap.js"

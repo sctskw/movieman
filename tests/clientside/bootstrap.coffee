@@ -1,4 +1,5 @@
 #bootstrap backbone configs
 Backbone = require 'backbone'
-Backbone.$ = require 'jquery'
+$ = require 'jquery'
+Backbone.$ = $
 _ = require 'underscore'
