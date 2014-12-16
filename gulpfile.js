@@ -144,7 +144,7 @@ gulp.task('server', function() {
     });
 });
 
-gulp.task('watch', ['bundle', 'server'], function() {
+gulp.task('watch', ['bundle'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
   gulp.watch(src.browserify.watch.src, src.browserify.watch.exec);

@@ -22,11 +22,16 @@
 #search-loader {
   margin: 200px auto;
   font-size: 2em;
-  width: 400px;
+  min-width: 100px;
+  text-align: center;
+  width: 100%;
 
   .loading-icon {
-    float: left;
     width: 50px;
+  }
+
+  & > * {
+    display: inline-block;
   }
 }
 
