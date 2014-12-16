@@ -1,6 +1,9 @@
 var BaseView = require('./base');
 var _ = require('underscore');
 
+var headerTpl = require('./templates/header.jade');
+var footerTpl = require('./templates/footer.jade');
+
 /**
  * Class ViewPort
  *
@@ -18,16 +21,14 @@ module.exports = BaseView.extend({
   },
 
   //render a partial template to document.body
-  _renderPartial: function(templateId, data) {
-    var tpl= this.$html(templateId); //retrieve html template from DOM
-    var template = _.template(tpl); //convert to template func
-    this.$el.append(template(data)); //append tpl to document
+  _renderPartial: function(templateFunc, data) {
+    this.$el.append(templateFunc(data || {})); //append tpl to document
     return this;
   },
 
   //render the header as a partial
   _renderHeader: function() {
-    this._renderPartial('#tpl-header', {
+    this._renderPartial(headerTpl, {
       username: this.getUserName()
     });
 
@@ -36,7 +37,7 @@ module.exports = BaseView.extend({
 
   //render the footer as a partial
   _renderFooter: function() {
-    this._renderPartial('#tpl-footer');
+    this._renderPartial(footerTpl);
     return this;
   },
 

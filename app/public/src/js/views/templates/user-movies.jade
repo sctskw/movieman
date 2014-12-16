@@ -1,0 +1,15 @@
+#user-movies.panel.panel-default
+  div.panel-heading
+    h1.heading
+      i.heading-icon
+      span.heading-text My Favorites
+  div.panel-body
+    if movies.length
+      ul.movie-list
+        each movie in movies
+          li.movie-item
+            include movie/preview.jade
+    else
+      h4
+        em Oops! You don't have any favorites! Start searching!
+

@@ -3,6 +3,11 @@ var SearchResults = require('../collections/searchResults');
 var MovieCollection = require('../collections/movies');
 var SearchBar = require('./partials/searchBar');
 
+//templates
+var searchViewTpl = require('./templates/search-view.jade');
+var searchResultsTpl = require('./templates/search-results.jade');
+
+
 //create movie collection
 var Movies = new MovieCollection();
 
@@ -71,9 +76,6 @@ module.exports = BaseView.extend({
   },
 
   renderSearchResults: function(results) {
-    var html = this.$html('#tpl-search-results');
-    var template = this.$tpl(html);
-
     //hide the loading indicator
     this.stopLoading();
 
@@ -81,7 +83,7 @@ module.exports = BaseView.extend({
     this.renderSearchBar(); //so user can search again
 
     //render results list
-    this.$el.find('#search-results').append(template({
+    this.$el.find('#search-results').append(searchResultsTpl({
       searchTerm: this.searchTerm,
       results: results
     }));
@@ -96,10 +98,7 @@ module.exports = BaseView.extend({
 
   //render the view
   render: function() {
-    var html = this.$html('#tpl-search-view');
-    var template = this.$tpl(html);
-
-    this.$el.html(template({
+    this.$el.html(searchViewTpl({
       searchTerm: this.searchTerm
     }));
 

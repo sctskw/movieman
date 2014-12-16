@@ -1,4 +1,5 @@
 var BaseView = require('../base');
+var tpl = require('../templates/search-bar.jade');
 
 //Class SearchBar
 //partial view contains the search form
@@ -34,9 +35,7 @@ module.exports = BaseView.extend({
 
   //render the view
   render: function() {
-    var html = this.$html('#tpl-search-bar');
-    var template = this.$tpl(html);
-    this.$el.html(template());
+    this.$el.html(tpl());
     this.delegateEvents(); //force event behavior
     return this;
   }

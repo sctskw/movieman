@@ -112,7 +112,6 @@ gulp.task('concat:tests', function() {
 
 gulp.task('test:client', ['concat:tests'], function() {
   //clientside tests
-  //@TODO: convert Coffee to JS before browserifying
   return gulp.src([src.browserify.src, src.test.client.files])
     .pipe(plugins.browserify(src.browserify.test.options))
     .pipe(plugins.rename(src.browserify.test.destFilename))
@@ -153,6 +152,14 @@ gulp.task('server', function() {
     .on('restart', function() {
       console.log('refreshing server');
     });
+});
+
+gulp.task('jade', function() {
+  return gulp.src('./app/views/**/*.jade')
+    .pipe(plugins.jade({
+      client: true
+    }))
+    .pipe(gulp.dest('./app/public/src/js/views/templates/'))
 });
 
 gulp.task('watch', ['bundle'], function() {

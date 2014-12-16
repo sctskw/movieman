@@ -2,6 +2,8 @@ var BaseView = require('./base');
 var UserMovies = require('../collections/userMovies');
 var SearchBar = require('./partials/searchBar');
 
+var tpl = require('./templates/user-movies.jade')
+
 //Class IndexView
 //
 module.exports = BaseView.extend({
@@ -26,9 +28,7 @@ module.exports = BaseView.extend({
 
   //populate list of movies
   renderMovieCollection: function(movies) {
-    var html = this.$html('#tpl-user-movie-collection');
-    var template = this.$tpl(html);
-    this.$el.append(template({movies: movies}));
+    this.$el.append(tpl({movies: movies}));
     return this;
   },
 

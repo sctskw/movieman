@@ -1,7 +1,8 @@
 module.exports = function(config) {
   config.set({
     preprocessors: {
-      '**/*.coffee': ['coffee']
+      '**/*.coffee': ['coffee'],
+      '**/*.jade': ['jade', 'html2js']
     },
     coffeePreprocessor: {
       options: {
@@ -10,7 +11,7 @@ module.exports = function(config) {
       }
     },
 
-    frameworks: ['mocha', 'chai', 'browserify'],
+    frameworks: ['mocha', 'chai'],
     reporters: ['mocha'],
     plugins: [
       "karma-browserify",
@@ -20,12 +21,11 @@ module.exports = function(config) {
       "karma-chai-jquery",
       "karma-phantomjs-launcher",
       "karma-mocha-reporter",
-      "karma-coffee-preprocessor"
+      "karma-coffee-preprocessor",
+      "karma-jade-preprocessor"
     ],
 
-    files: [
-      './app/globals.js'
-    ],
+    files: [],
 
     browsers: ['PhantomJS']
   });
