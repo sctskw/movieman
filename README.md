@@ -18,6 +18,7 @@ npm start
 You may log into the application with any username/password combination. Once logged in, the user you chose, will be able to add favorites. Next time you log in as this user, your collection will be available. We have also pre-populated a user to help you get started:
 
 User: demo
+
 Pass: demo
 
 ### Testing
