@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.set({
     preprocessors: {
       '**/*.coffee': ['coffee'],
-      '**/*.jade': ['jade', 'html2js']
+      '**/*.jade': ['jade']
     },
     coffeePreprocessor: {
       options: {

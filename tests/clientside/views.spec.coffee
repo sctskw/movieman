@@ -1,9 +1,6 @@
 BaseView = require './views/base'
 IndexView = require './views/index'
 UserMovies = require './collections/userMovies'
-templates = require './templates'
-
-console.log templates
 
 describe 'View Tests', ->
 

@@ -154,14 +154,6 @@ gulp.task('server', function() {
     });
 });
 
-gulp.task('jade', function() {
-  return gulp.src('./app/views/**/*.jade')
-    .pipe(plugins.jade({
-      client: true
-    }))
-    .pipe(gulp.dest('./app/public/src/js/views/templates/'))
-});
-
 gulp.task('watch', ['bundle'], function() {
   gulp.watch(src.test.watch.src, src.test.watch.exec);
   gulp.watch(src.less.watch.src, src.less.watch.exec);
