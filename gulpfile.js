@@ -58,7 +58,10 @@ var src = {
       }
     },
     watch: {
-      src: ['app/public/src/js/**/*.js'],
+      src: [
+      'app/public/src/js/**/*.js',
+      'app/public/src/js/views/templates/**/*.jade'
+      ],
       exec: ['bundle']
     }
   },
