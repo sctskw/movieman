@@ -3,10 +3,13 @@ MovieMan
 
 A simple app to manage and maintain your favorite movie collection.
 
+Read the [Specification Document]("https://github.com/sctskw/movieman/wiki/Spec-Doc")
+
 
 ### Installation
 ```
-git clone https://github.com/sctskw/movieman.git && npm install
+git clone https://github.com/sctskw/movieman.git && cd movieman
+npm install
 npm start
 ```
 
@@ -24,8 +27,8 @@ npm test
 
 
 ### Known Issues
-- Authentication:
+- Authentication [#1]:
     - Currently, authentication does not check against a user database. You can enter any username/password combination and you will be logged in as that user. Passwords are not saved or stored anywhere.
 
-- Search Page Not Remembering Favorites:
+- Search Page Not Remembering Favorites [#2]:
     - Currently, the search page does not show you if you have already favorited a movie. This feature will be added in a future release.
