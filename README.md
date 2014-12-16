@@ -3,7 +3,7 @@ MovieMan
 
 A simple app to manage and maintain your favorite movie collection.
 
-Read the [Specification Document]("https://github.com/sctskw/movieman/wiki/Spec-Doc")
+Read the [Specification Document](https://github.com/sctskw/movieman/wiki/Spec-Doc)
 
 
 ### Installation
