@@ -25,7 +25,7 @@ npm test
 ```
 
 ### Browser Support
-- Chrome **best viewing experience**
+- Chrome [_best viewing experience_]
 - Firefox
 - Safari
 
