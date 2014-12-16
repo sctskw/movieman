@@ -4,11 +4,13 @@ SearchResultCollection = require './collections/searchResults'
 UserMovieCollection = require './collections/userMovies'
 
 describe 'CollectionTests', ->
+
   describe 'BaseCollection', ->
     it '#parse(resp) should return resp.data', ->
       base = new BaseCollection()
       resp = data: 'test'
       base.parse(resp).should.equal 'test'
+
   describe 'MovieCollection', ->
     beforeEach ->
       @movies = new MovieCollection()
@@ -16,6 +18,7 @@ describe 'CollectionTests', ->
       @movies.url.should.equal '/api/movies/'
     it 'should have a model defined', ->
       @movies.model.should.exist
+
   describe 'SearchResultCollection', ->
     beforeEach ->
       cfg = searchTerm: 'test'
@@ -27,6 +30,7 @@ describe 'CollectionTests', ->
     it 'should have url /api/movies/search/title/test', ->
       url = '/api/movies/search/title/test'
       @searchResults.url().should.equal url
+
   describe 'UserMovieCollection', ->
     beforeEach ->
       cfg = user: 'testUser'
