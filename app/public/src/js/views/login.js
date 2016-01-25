@@ -1,6 +1,7 @@
 var BaseView = require('./base');
 var _ = require('underscore');
-
+var jQuery = require('jQuery');
+var Promise = require('bluebird');
 var tpl = require('./templates/login-form.jade');
 var greetingTpl = require('./templates/login-greeting.jade');
 
@@ -40,10 +41,26 @@ module.exports = BaseView.extend({
 
   //perform login event
   onLogin: function($event) {
-    if(!this.validate()){
-      $event.preventDefault(); //prevent login
-      this.showValidationErrors();
-    }
+    self = this;
+    console.log('$event is', $event);
+    console.log('onLogin hit');
+    $event.preventDefault(); //prevent login
+    this.validate().then(function(){
+      var username = self.getUser().val();
+      var password = self.getPass().val();
+      var user = {
+        username: username,
+        password: password,
+      };
+      jQuery.post('/login', user);
+      // Still super hacky way of doing this
+      // TODO Implement session based auth
+      window.location = "/";
+    }).catch(function(err){
+      self.showValidationErrors();
+    });
+
+
   },
 
   //add an error to list of errors
@@ -69,17 +86,36 @@ module.exports = BaseView.extend({
 
   //validate the form fields
   validate: function() {
+    var self = this;
     var valid = true;
+    var username = this.getUser().val();
+    var password = this.getPass().val();
+    var user = {
+      username: username,
+      password: password,
+    };
 
-    if(!this.getUser().val()){
-      valid = false;
-      this.error('Username cannot be blank');
-    }
-    if(!this.getPass().val()) {
-      valid = false;
-      this.error('Password cannot be blank');
-    }
-    return valid;
+    return new Promise(function(resolve, reject){
+      if(!username){
+        valid = false;
+        self.error('Username cannot be blank');
+      }
+
+      if(!password) {
+        valid = false;
+        self.error('Password cannot be blank');
+      }
+
+      if (!valid){
+        return reject('invalid form fields');
+      }
+      jQuery.post('/api/login', user ,function(data){
+          return resolve(true);
+      }).error(function(){
+          self.error('invalid username and password combination');
+          return reject('Invalid passwords');
+      });
+    });
   },
 
   //display the current errors in the DOM
