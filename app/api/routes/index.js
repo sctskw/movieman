@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var movieRoutes = require('./movies');
+var authRoutes = require('./auth');
 
 //GET - api index
 function index(req, res) {
@@ -25,6 +26,9 @@ router.route('/movies/:id')
 //POST requires a separate route, since there's no ID yet
 router.post('/movies', movieRoutes.create);
 
+//route that will authenticate users that have logged in.
+router.post('/login', authRoutes.login);
+
 //default json response handler
 router.use(function(req, res, next) {
   if(!res.body) {
@@ -38,11 +42,11 @@ router.use(function(req, res, next) {
   }
 });
 
+
 //default error handling for API routes
 router.use(function(err, req, res, next) {
-  res.json({
+  res.status(err.status || 500).json({
     "success": false,
-    "status": err.status || 500,
     "message": err.message
   });
 });
