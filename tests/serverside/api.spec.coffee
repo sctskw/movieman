@@ -45,7 +45,13 @@ describe 'API Tests', ->
       .post('/api/login')
       .expect('Content-Type', /json/)
       .send(validUser)
-      .expect(200, done)
+      .expect(200)
+      .end (err, res) ->
+        console.log('res.body', res.body)
+        if res.body.data.password
+          err = new Error 'password should not be on response object'
+
+        done(err)
 
     it 'missing password should return 400', (done) ->
       request(app)

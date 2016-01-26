@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var _ = require('lodash');
 var movieRoutes = require('./movies');
 var authRoutes = require('./auth');
 
@@ -28,6 +28,20 @@ router.post('/movies', movieRoutes.create);
 
 //route that will authenticate users that have logged in.
 router.post('/login', authRoutes.login);
+
+
+// removes any sensitive information before it gets sent to the client
+router.use(function(req, res, next) {
+  if (_.isArray(res.body)){
+    res.body = _.map(res.body, function(obj){
+      return _.omit(obj, ['password']);
+    });
+
+    return next();
+  }
+  res.body = _.omit(res.body, ['password']);
+  return next();
+});
 
 //default json response handler
 router.use(function(req, res, next) {
